@@ -14,5 +14,6 @@ public class App {
      */
     public static void main(String...args) {
         // TODO [FR] (26.03.2021): do something useful
+        System.out.println("Do something");
     }
 }

@@ -15,7 +15,7 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <exec.mainclass>de.riefel.parameterized.App</exec.mainclass>
+        <exec.mainClass>de.riefel.parameterized.App</exec.mainClass>
     </properties>
 
     <build>
