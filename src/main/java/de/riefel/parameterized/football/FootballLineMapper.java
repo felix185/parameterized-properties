@@ -13,14 +13,14 @@ import java.util.Map;
  */
 public class FootballLineMapper extends AbstractLineMapper<FootballTO> {
 
-    private static final String TEAM_KEY = "Team";
-    private static final String GAMES_KEY = "Games";
-    private static final String WINS_KEY = "Wins";
-    private static final String LOSSES_KEY = "Losses";
-    private static final String DRAWS_KEY = "Draws";
-    private static final String GOALS_KEY = "Goals";
-    private static final String GOALS_ALLOWED_KEY = "Goals Allowed";
-    private static final String POINTS_KEY = "Points";
+    static final String TEAM_KEY = "Team";
+    static final String GAMES_KEY = "Games";
+    static final String WINS_KEY = "Wins";
+    static final String LOSSES_KEY = "Losses";
+    static final String DRAWS_KEY = "Draws";
+    static final String GOALS_KEY = "Goals";
+    static final String GOALS_ALLOWED_KEY = "Goals Allowed";
+    static final String POINTS_KEY = "Points";
 
     @Override
     public FootballTO mapToTO(final Map<String, String> toBeMapped) {
