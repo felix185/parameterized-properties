@@ -24,10 +24,12 @@ public abstract class AbstractTO implements Serializable {
     private final Map<StringProperty, String> stringProperties = new HashMap<>();
 
     protected String getValue(final StringProperty property) {
+        ArgumentChecker.checkNotNull(property, "Property");
         return this.stringProperties.get(property);
     }
 
     protected void setValue(final StringProperty property, final String value) {
+        ArgumentChecker.checkNotNull(property, "Property");
         final String currentValue = this.stringProperties.get(property);
         validateProperties(property.getAttributes(), property.getName(), currentValue, value);
         if(value != null) {
