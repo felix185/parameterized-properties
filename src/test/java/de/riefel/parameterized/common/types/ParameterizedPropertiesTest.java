@@ -3,8 +3,6 @@ package de.riefel.parameterized.common.types;
 import de.riefel.parameterized.common.errorhandling.exception.BusinessException;
 import org.junit.jupiter.api.Test;
 
-import javax.swing.plaf.basic.BasicButtonUI;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
