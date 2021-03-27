@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author Felix Riess <felix@felix-riess.de>
  * @since 26.03.21
  */
-public abstract class AbstractAbsoluteSpreadComparableTO implements Comparable<AbstractAbsoluteSpreadComparableTO>, Serializable {
+public abstract class AbstractAbsoluteSpreadComparableTO extends AbstractTO implements Comparable<AbstractAbsoluteSpreadComparableTO>, Serializable {
     /**
      * generated serialVersionUID.
      */

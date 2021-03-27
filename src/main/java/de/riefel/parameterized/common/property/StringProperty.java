@@ -1,5 +1,7 @@
 package de.riefel.parameterized.common.property;
 
+import de.riefel.parameterized.common.validation.ArgumentChecker;
+
 import java.util.regex.Pattern;
 
 /**
@@ -13,13 +15,21 @@ public class StringProperty extends AbstractProperty {
     private final int minLength;
     private final int maxLength;
 
+    /**
+     * Constructor.
+     *
+     * @param clazz the associated class of this property (not {@code null}).
+     * @param name the name of the property (not {@code null} or empty).
+     * @param pattern a specific RegEx pattern (may be {@code null}).
+     * @param minLength the min length of the attribute ({@code minLength <= maxLength}).
+     * @param maxLength the max length of the attribute ({@code minLength <= maxLength}).
+     * @param attributes additional {@link PropertyAttribute}s.
+     */
     public StringProperty(final Class<?> clazz, final String name, final Pattern pattern, final int minLength,
                           final int maxLength, PropertyAttribute...attributes) {
         super(clazz, name, attributes);
+        ArgumentChecker.checkIsTrue(minLength <= maxLength, "MinLength {} is greater than MaxLength {}", minLength, maxLength);
         this.pattern = pattern;
-        if(minLength > maxLength) {
-            throw new IllegalArgumentException("MinLength must not be greater than MaxLength");
-        }
         this.minLength = minLength;
         this.maxLength = maxLength;
     }
@@ -27,7 +37,7 @@ public class StringProperty extends AbstractProperty {
     /**
      * Get pattern
      *
-     * @return value of pattern
+     * @return value of pattern (may be {@code null}).
      */
     public Pattern getPattern() {
         return this.pattern;

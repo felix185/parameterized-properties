@@ -1,5 +1,7 @@
 package de.riefel.parameterized.football;
 
+import de.riefel.parameterized.common.property.PropertyAttribute;
+import de.riefel.parameterized.common.property.StringProperty;
 import de.riefel.parameterized.common.types.AbstractAbsoluteSpreadComparableTO;
 
 /**
@@ -15,7 +17,8 @@ public class FootballTO extends AbstractAbsoluteSpreadComparableTO{
      */
     private static final long serialVersionUID = 875069962018384368L;
 
-    private final String team;
+    private static final StringProperty TEAM = new StringProperty(FootballTO.class, "Team", null, 1, Integer.MAX_VALUE, PropertyAttribute.NOT_NULLABLE, PropertyAttribute.IMMUTABLE);
+
     private final int games;
     private final int wins;
     private final int losses;
@@ -27,7 +30,7 @@ public class FootballTO extends AbstractAbsoluteSpreadComparableTO{
     public FootballTO(final String team, final int games, final int wins, final int losses, final int draws,
                       final int goals, final int goalsAllowed, final int points) {
         super(goals, goalsAllowed);
-        this.team = team;
+        setValue(TEAM, team);
         this.games = games;
         this.wins = wins;
         this.losses = losses;
@@ -43,7 +46,7 @@ public class FootballTO extends AbstractAbsoluteSpreadComparableTO{
      * @return value of team
      */
     public String getTeam() {
-        return this.team;
+        return getValue(TEAM);
     }
 
     /**
@@ -139,12 +142,12 @@ public class FootballTO extends AbstractAbsoluteSpreadComparableTO{
         if (this.points != that.points) {
             return false;
         }
-        return this.team != null ? this.team.equals(that.team) : that.team == null;
+        return this.getTeam() != null ? this.getTeam().equals(that.getTeam()) : that.getTeam() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = this.team != null ? this.team.hashCode() : 0;
+        int result = this.getTeam() != null ? this.getTeam().hashCode() : 0;
         result = 31 * result + this.games;
         result = 31 * result + this.wins;
         result = 31 * result + this.losses;
@@ -158,7 +161,7 @@ public class FootballTO extends AbstractAbsoluteSpreadComparableTO{
     @Override
     public String toString() {
         return "FootballTO{" +
-                "team='" + this.team + '\'' +
+                "team='" + getTeam() + '\'' +
                 ", games=" + this.games +
                 ", wins=" + this.wins +
                 ", losses=" + this.losses +

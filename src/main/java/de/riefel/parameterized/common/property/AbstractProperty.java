@@ -1,8 +1,11 @@
 package de.riefel.parameterized.common.property;
 
+import de.riefel.parameterized.common.validation.ArgumentChecker;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -17,13 +20,16 @@ public abstract class AbstractProperty {
     private final String name;
     private final List<PropertyAttribute> attributes = new ArrayList<>();
 
+    /**
+     * Constructor.
+     *
+     * @param clazz the associated class with this property (not {@code null}).
+     * @param name the name of the property (not {@code null} or empty).
+     * @param attributes additional {@link PropertyAttribute}s.
+     */
     protected AbstractProperty(final Class<?> clazz, final String name, final PropertyAttribute... attributes) {
-        if(clazz == null) {
-            throw new IllegalArgumentException("Class must not be null");
-        }
-        if(name == null || name.isEmpty()) {
-            throw new IllegalArgumentException("Name must not be null or empty");
-        }
+        ArgumentChecker.checkNotNull(clazz, "Class");
+        ArgumentChecker.checkNotEmpty(name, "Name");
         this.clazz = clazz;
         this.name = name;
         if(attributes.length > 0) {
@@ -32,12 +38,20 @@ public abstract class AbstractProperty {
     }
 
     /**
-     * Get attributes
+     * Get name
      *
-     * @return value of attributes
+     * @return value of name
      */
-    public List<PropertyAttribute> getAttributes() {
-        return Collections.unmodifiableList(this.attributes);
+    public String getName() {
+        return this.name;
+    }
+
+    /**
+     * Get an iterator over an unmodifiable list of the {@link PropertyAttribute}s
+     * @return an {@link java.util.Iterator} over an unmodifiable list of the {@link PropertyAttribute}s.
+     */
+    public Iterator<PropertyAttribute> getAttributes() {
+        return Collections.unmodifiableList(this.attributes).iterator();
     }
 
     @Override
