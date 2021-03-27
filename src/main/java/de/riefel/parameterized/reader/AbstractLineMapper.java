@@ -1,7 +1,7 @@
 package de.riefel.parameterized.reader;
 
-import de.riefel.parameterized.common.exception.BusinessException;
 import de.riefel.parameterized.common.types.AbstractAbsoluteSpreadComparableTO;
+import de.riefel.parameterized.common.validation.ArgumentChecker;
 
 import java.util.Map;
 
@@ -11,7 +11,7 @@ import java.util.Map;
  * @author Felix Riess <felix@felix-riess.de>
  * @since 26.03.21
  */
-public abstract class AbstractLineMapper <T extends AbstractAbsoluteSpreadComparableTO> implements ILineMapper<T> {
+public abstract class AbstractLineMapper<T extends AbstractAbsoluteSpreadComparableTO> implements ILineMapper<T> {
 
     protected int getIntPropertyOrFail(final Map<String, String> line, final String key) {
         final String value = getStringPropertyOrFail(line, key);
@@ -25,10 +25,7 @@ public abstract class AbstractLineMapper <T extends AbstractAbsoluteSpreadCompar
 
     protected String getStringPropertyOrFail(final Map<String, String> line, final String key) {
         final String value = line.get(key);
-        if(value == null) {
-            System.out.println("No value defined for key " + key);
-            throw new BusinessException("No value defined for key " + key);
-        }
+        ArgumentChecker.checkNotNull(value, "Value for key " + key);
         return value;
     }
 }

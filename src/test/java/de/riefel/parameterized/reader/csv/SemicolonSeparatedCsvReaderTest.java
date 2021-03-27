@@ -19,7 +19,7 @@ public class SemicolonSeparatedCsvReaderTest {
 
     @Test
     void readLinesFromFile_withValidAndInvalidLines_shouldReturnValidLines() {
-        final String pathToFile = "src/test/resources/de/riefel/test_semicolon.csv";
+        final String pathToFile = "src/test/resources/de/riefel/parameterized/test_semicolon.csv";
         final Map<String, String> firstLine = new HashMap<>();
         firstLine.put("eins", "vier");
         firstLine.put("zwei", "fünf");

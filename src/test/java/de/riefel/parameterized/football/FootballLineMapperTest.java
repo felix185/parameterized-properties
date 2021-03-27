@@ -1,6 +1,6 @@
 package de.riefel.parameterized.football;
 
-import de.riefel.parameterized.common.exception.BusinessException;
+import de.riefel.parameterized.common.errorhandling.exception.BusinessException;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;

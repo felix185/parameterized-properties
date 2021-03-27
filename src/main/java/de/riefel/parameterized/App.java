@@ -23,7 +23,7 @@ public class App {
      */
     public static void main(String...args) {
         final IDataReader csvDataReader = DataReaderFactory.getDataReader(DataReaderType.CSV_COMMA_SEPARATED);
-        final String pathToFootballData = "src/main/resources/de/riefel/football.csv";
+        final String pathToFootballData = "src/main/resources/de/riefel/parameterized/football.csv";
         final List<FootballTO> footballData = csvDataReader.readData(pathToFootballData, new FootballLineMapper());
         if(footballData.isEmpty()) {
             System.out.println("No football data could be read");

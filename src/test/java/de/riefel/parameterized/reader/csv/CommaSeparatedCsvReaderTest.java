@@ -1,6 +1,6 @@
 package de.riefel.parameterized.reader.csv;
 
-import de.riefel.parameterized.common.exception.BusinessException;
+import de.riefel.parameterized.common.errorhandling.exception.BusinessException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -21,7 +21,7 @@ public class CommaSeparatedCsvReaderTest {
 
     @Test
     void readLinesFromFile_withValidAndInvalidLines_shouldReturnValidLines() {
-        final String pathToFile = "src/test/resources/de/riefel/test_comma.csv";
+        final String pathToFile = "src/test/resources/de/riefel/parameterized/test_comma.csv";
         final Map<String, String> firstLine = new HashMap<>();
         firstLine.put("eins", "vier");
         firstLine.put("zwei", "fünf");

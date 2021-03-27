@@ -1,7 +1,7 @@
 package de.riefel.parameterized.reader;
 
-import de.riefel.parameterized.common.exception.BusinessException;
 import de.riefel.parameterized.common.types.AbstractAbsoluteSpreadComparableTO;
+import de.riefel.parameterized.common.validation.ArgumentChecker;
 
 import java.util.List;
 import java.util.Map;
@@ -17,14 +17,8 @@ public abstract class AbstractDataReader implements IDataReader {
 
     @Override
     public <T extends AbstractAbsoluteSpreadComparableTO> List<T> readData(String pathToFile, ILineMapper<T> lineMapper) {
-        if(pathToFile == null || pathToFile.isEmpty()) {
-            System.out.println("Path to file is null or empty");
-            throw new BusinessException("Path to file is null or empty");
-        }
-        if(lineMapper == null) {
-            System.out.println("Line mapper is null");
-            throw new BusinessException("Line mapper is null");
-        }
+        ArgumentChecker.checkNotEmpty(pathToFile, "Path to file");
+        ArgumentChecker.checkNotNull(lineMapper, "Line mapper");
         return readLinesFromFile(pathToFile).stream().map(lineMapper::mapToTO).collect(Collectors.toList());
     }
 

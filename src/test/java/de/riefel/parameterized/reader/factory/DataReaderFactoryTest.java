@@ -1,6 +1,6 @@
 package de.riefel.parameterized.reader.factory;
 
-import de.riefel.parameterized.common.exception.TechnicalException;
+import de.riefel.parameterized.common.errorhandling.exception.TechnicalException;
 import de.riefel.parameterized.reader.IDataReader;
 import de.riefel.parameterized.reader.csv.CommaSeparatedCsvReader;
 import de.riefel.parameterized.reader.csv.SemicolonSeparatedCsvReader;

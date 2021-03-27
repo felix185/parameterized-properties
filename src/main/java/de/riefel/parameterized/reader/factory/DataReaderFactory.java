@@ -1,6 +1,7 @@
 package de.riefel.parameterized.reader.factory;
 
-import de.riefel.parameterized.common.exception.TechnicalException;
+import de.riefel.parameterized.common.errorhandling.ErrorCode;
+import de.riefel.parameterized.common.errorhandling.exception.TechnicalException;
 import de.riefel.parameterized.reader.IDataReader;
 import de.riefel.parameterized.reader.csv.CommaSeparatedCsvReader;
 import de.riefel.parameterized.reader.csv.SemicolonSeparatedCsvReader;
@@ -13,9 +14,10 @@ import de.riefel.parameterized.reader.csv.SemicolonSeparatedCsvReader;
  */
 public final class DataReaderFactory {
 
-    // private constructor to hide implicit public one.
+    /**
+     * private constructor to hide implicit public one.
+     */
     private DataReaderFactory() {
-        throw new TechnicalException("DataReaderFactory cannot be initialized");
     }
 
     /**
@@ -33,7 +35,7 @@ public final class DataReaderFactory {
             case XML:
             case JSON:
             default:
-                throw new TechnicalException("XML and JSON readers are not yet implemented");
+                throw new TechnicalException(ErrorCode.ILLEGAL_ACCESS, "XML and JSON readers are not yet implemented");
         }
     }
 }

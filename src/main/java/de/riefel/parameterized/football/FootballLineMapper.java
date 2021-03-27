@@ -1,6 +1,7 @@
 package de.riefel.parameterized.football;
 
-import de.riefel.parameterized.common.exception.BusinessException;
+import de.riefel.parameterized.common.logging.ILogger;
+import de.riefel.parameterized.common.validation.ArgumentChecker;
 import de.riefel.parameterized.reader.AbstractLineMapper;
 
 import java.util.Map;
@@ -13,6 +14,8 @@ import java.util.Map;
  */
 public class FootballLineMapper extends AbstractLineMapper<FootballTO> {
 
+    private static final ILogger LOG = ILogger.getLogger(FootballLineMapper.class);
+
     static final String TEAM_KEY = "Team";
     static final String GAMES_KEY = "Games";
     static final String WINS_KEY = "Wins";
@@ -24,10 +27,7 @@ public class FootballLineMapper extends AbstractLineMapper<FootballTO> {
 
     @Override
     public FootballTO mapToTO(final Map<String, String> toBeMapped) {
-        if(toBeMapped.size() != 8) {
-            System.out.println("Invalid numbers of arguments in this line. Cannot map to FootballTO");
-            throw new BusinessException("Invalid number of arguments (" + toBeMapped.size() + ") in this line. Expected 8. Cannot map to FootballTO");
-        }
+        ArgumentChecker.checkInterval(8, toBeMapped.size(), 9, "Line length");
         final String team = getStringPropertyOrFail(toBeMapped, TEAM_KEY);
         final int games = getIntPropertyOrFail(toBeMapped, GAMES_KEY);
         final int wins = getIntPropertyOrFail(toBeMapped, WINS_KEY);

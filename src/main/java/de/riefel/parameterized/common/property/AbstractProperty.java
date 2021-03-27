@@ -32,24 +32,6 @@ public abstract class AbstractProperty {
     }
 
     /**
-     * Get clazz
-     *
-     * @return value of clazz
-     */
-    public Class<?> getClazz() {
-        return this.clazz;
-    }
-
-    /**
-     * Get name
-     *
-     * @return value of name
-     */
-    public String getName() {
-        return this.name;
-    }
-
-    /**
      * Get attributes
      *
      * @return value of attributes
