@@ -34,10 +34,10 @@ public abstract class AbstractTO implements Serializable {
         validateProperties(property.getAttributes(), property.getName(), currentValue, value);
         if(value != null) {
             ArgumentChecker.checkIntervalUpperBoundIncluded(property.getMinLength(), value.length(), property.getMaxLength(), property.getName() + " length");
-        }
-        if (property.getPattern() != null) {
-            final String pattern = property.getPattern().pattern();
-            ArgumentChecker.checkIsTrue(value.matches(pattern), "Value {} does not match pattern {}", value, pattern);
+            if (property.getPattern() != null) {
+                final String pattern = property.getPattern().pattern();
+                ArgumentChecker.checkIsTrue(value.matches(pattern), "Value {} does not match pattern {}", value, pattern);
+            }
         }
         this.stringProperties.compute(property, (k, v) -> value);
     }
