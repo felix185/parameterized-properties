@@ -1,5 +1,6 @@
 package de.riefel.parameterized;
 
+import de.riefel.parameterized.common.logging.ILogger;
 import de.riefel.parameterized.football.FootballLineMapper;
 import de.riefel.parameterized.football.FootballTO;
 import de.riefel.parameterized.reader.IDataReader;
@@ -17,6 +18,8 @@ import java.util.List;
  */
 public class App {
 
+    private static final ILogger LOG = ILogger.getLogger(App.class);
+
     /**
      * The main entry method of the app.
      * @param args optional command line arguments
@@ -26,11 +29,11 @@ public class App {
         final String pathToFootballData = "src/main/resources/de/riefel/parameterized/football.csv";
         final List<FootballTO> footballData = csvDataReader.readData(pathToFootballData, new FootballLineMapper());
         if(footballData.isEmpty()) {
-            System.out.println("No football data could be read");
+            LOG.warn("No football data could be read");
         } else {
             Collections.sort(footballData);
             final FootballTO smallestGoalSpread = footballData.get(0);
-            System.out.println("Team with smallest goal spread is: " + smallestGoalSpread.getTeam());
+            LOG.info("Team with smallest goal spread is: {}", smallestGoalSpread.getTeam());
         }
     }
 }

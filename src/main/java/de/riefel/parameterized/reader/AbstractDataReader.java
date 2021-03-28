@@ -1,5 +1,7 @@
 package de.riefel.parameterized.reader;
 
+import de.riefel.parameterized.common.errorhandling.exception.BusinessException;
+import de.riefel.parameterized.common.logging.ILogger;
 import de.riefel.parameterized.common.types.AbstractAbsoluteSpreadComparableTO;
 import de.riefel.parameterized.common.validation.ArgumentChecker;
 
@@ -15,11 +17,20 @@ import java.util.stream.Collectors;
  */
 public abstract class AbstractDataReader implements IDataReader {
 
+    private static final ILogger LOG = ILogger.getLogger(AbstractDataReader.class);
+
     @Override
     public <T extends AbstractAbsoluteSpreadComparableTO> List<T> readData(String pathToFile, ILineMapper<T> lineMapper) {
         ArgumentChecker.checkNotEmpty(pathToFile, "Path to file");
         ArgumentChecker.checkNotNull(lineMapper, "Line mapper");
-        return readLinesFromFile(pathToFile).stream().map(lineMapper::mapToTO).collect(Collectors.toList());
+        return readLinesFromFile(pathToFile).stream().map(line -> {
+            try {
+                return lineMapper.mapToTO(line);
+            } catch (BusinessException ex) {
+                LOG.warn("Cannot convert line to TO: {}", ex.getMessage());
+                return null;
+            }
+        }).filter(o -> o != null).collect(Collectors.toList());
     }
 
     /**

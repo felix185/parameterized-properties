@@ -32,7 +32,7 @@ public abstract class AbstractTO implements Serializable {
         ArgumentChecker.checkNotNull(property, "Property");
         final String currentValue = this.stringProperties.get(property);
         validateProperties(property.getAttributes(), property.getName(), currentValue, value);
-        if(value != null) {
+        if (value != null) {
             ArgumentChecker.checkIntervalUpperBoundIncluded(property.getMinLength(), value.length(), property.getMaxLength(), property.getName() + " length");
             if (property.getPattern() != null) {
                 final String pattern = property.getPattern().pattern();

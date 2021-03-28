@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class SemicolonSeparatedCsvReaderTest {
 
-    private SemicolonSeparatedCsvReader underTest = new SemicolonSeparatedCsvReader();
+    private final SemicolonSeparatedCsvReader underTest = new SemicolonSeparatedCsvReader();
 
     @Test
     void readLinesFromFile_withValidAndInvalidLines_shouldReturnValidLines() {

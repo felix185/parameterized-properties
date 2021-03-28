@@ -4,6 +4,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Implementation of {@link ILogger} based on {@link Logger}.
+ *
  * @author Felix Riess <felix@felix-riess.de>
  * @since 27.03.21
  */

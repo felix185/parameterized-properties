@@ -45,7 +45,7 @@ public abstract class AbstractCsvReader extends AbstractDataReader {
                     header.addAll(currentLineSplit);
                 } else {
                     if (currentLineSplit.size() != header.size()) {
-                        System.out.println("Line has other size than header. Line is ignored");
+                        LOG.warn("Line has other size ({}) than header ({}). Line is ignored", currentLineSplit.size(), header.size());
                     } else {
                         final Map<String, String> lineAsMap = new HashMap<>();
                         for (int i = 0; i < currentLineSplit.size(); i++) {

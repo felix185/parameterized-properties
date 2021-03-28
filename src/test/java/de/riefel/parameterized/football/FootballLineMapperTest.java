@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 public class FootballLineMapperTest {
 
-    private FootballLineMapper underTest = new FootballLineMapper();
+    private final FootballLineMapper underTest = new FootballLineMapper();
 
     @Test
     void mapToTO_invalidArgs_shouldThrowBusinessException() {

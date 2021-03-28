@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 public class CommaSeparatedCsvReaderTest {
 
-    private CommaSeparatedCsvReader underTest = new CommaSeparatedCsvReader();
+    private final CommaSeparatedCsvReader underTest = new CommaSeparatedCsvReader();
 
     @Test
     void readLinesFromFile_withValidAndInvalidLines_shouldReturnValidLines() {

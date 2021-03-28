@@ -18,7 +18,7 @@ public abstract class AbstractProperty {
 
     private final Class<?> clazz;
     private final String name;
-    private final List<PropertyAttribute> attributes = new ArrayList<>();
+    private final List<PropertyAttribute> attributes;
 
     /**
      * Constructor.
@@ -32,9 +32,7 @@ public abstract class AbstractProperty {
         ArgumentChecker.checkNotEmpty(name, "Name");
         this.clazz = clazz;
         this.name = name;
-        if(attributes.length > 0) {
-            this.attributes.addAll(Arrays.asList(attributes));
-        }
+        this.attributes = List.of(attributes);
     }
 
     /**
@@ -48,10 +46,10 @@ public abstract class AbstractProperty {
 
     /**
      * Get an iterator over an unmodifiable list of the {@link PropertyAttribute}s
-     * @return an {@link java.util.Iterator} over an unmodifiable list of the {@link PropertyAttribute}s.
+     * @return an {@link Iterator} over an unmodifiable list of the {@link PropertyAttribute}s.
      */
     public Iterator<PropertyAttribute> getAttributes() {
-        return Collections.unmodifiableList(this.attributes).iterator();
+        return this.attributes.iterator();
     }
 
     @Override
