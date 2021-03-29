@@ -43,4 +43,12 @@ public class TestTO extends AbstractTO {
     public void setRival(final String rival) {
         setValue(RIVAL, rival);
     }
+
+    @Override
+    public String toString() {
+        return "TestTO{" +
+                "team='" + this.getTeam() + '\'' +
+                ", rival=" + this.getRival() +
+                '}';
+    }
 }

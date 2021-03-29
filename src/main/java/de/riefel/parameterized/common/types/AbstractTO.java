@@ -72,4 +72,19 @@ public abstract class AbstractTO implements Serializable {
             }
         }
     }
+
+    @Override
+    public int hashCode() {
+        int result = 0;
+        for (final String stringProperty : this.stringProperties.values()) {
+            result = 31 * result + (stringProperty != null ? stringProperty.hashCode() : 0);
+        }
+        for (final Integer integerProperty : this.integerProperties.values()) {
+            result = 31 * result + (integerProperty != null ? integerProperty : 0);
+        }
+        return result;
+    }
+
+    @Override
+    public abstract String toString();
 }

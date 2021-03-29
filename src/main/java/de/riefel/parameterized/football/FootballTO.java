@@ -146,19 +146,6 @@ public class FootballTO extends AbstractAbsoluteSpreadComparableTO{
     }
 
     @Override
-    public int hashCode() {
-        int result = this.getTeam() != null ? this.getTeam().hashCode() : 0;
-        result = 31 * result + this.getGames();
-        result = 31 * result + this.getWins();
-        result = 31 * result + this.getLosses();
-        result = 31 * result + this.getDraws();
-        result = 31 * result + this.getGoals();
-        result = 31 * result + this.getGoalsAllowed();
-        result = 31 * result + this.getPoints();
-        return result;
-    }
-
-    @Override
     public String toString() {
         return "FootballTO{" +
                 "team='" + this.getTeam() + '\'' +

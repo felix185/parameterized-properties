@@ -41,11 +41,5 @@ public abstract class AbstractAbsoluteSpreadComparableTO extends AbstractTO impl
     }
 
     @Override
-    public abstract int hashCode();
-
-    @Override
     public abstract boolean equals(Object o);
-
-    @Override
-    public abstract String toString();
 }
