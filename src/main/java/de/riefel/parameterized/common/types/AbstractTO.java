@@ -1,5 +1,6 @@
 package de.riefel.parameterized.common.types;
 
+import de.riefel.parameterized.common.property.IntegerProperty;
 import de.riefel.parameterized.common.property.PropertyAttribute;
 import de.riefel.parameterized.common.property.StringProperty;
 import de.riefel.parameterized.common.validation.ArgumentChecker;
@@ -22,6 +23,22 @@ public abstract class AbstractTO implements Serializable {
     private static final long serialVersionUID = 6957221635679729861L;
 
     private final Map<StringProperty, String> stringProperties = new HashMap<>();
+    private final Map<IntegerProperty, Integer> integerProperties = new HashMap<>();
+
+    protected Integer getValue(final IntegerProperty property) {
+        ArgumentChecker.checkNotNull(property, "Property");
+        return this.integerProperties.get(property);
+    }
+
+    protected void setValue(final IntegerProperty property, final Integer value) {
+        ArgumentChecker.checkNotNull(property, "Property");
+        final Integer currentValue = this.integerProperties.get(property);
+        validateProperties(property.getAttributes(), property.getName(), currentValue, value);
+        if (value != null) {
+            ArgumentChecker.checkIntervalUpperBoundIncluded(property.getMinValue(), value, property.getMaxValue(), property.getName());
+        }
+        this.integerProperties.compute(property, (k, v) -> value);
+    }
 
     protected String getValue(final StringProperty property) {
         ArgumentChecker.checkNotNull(property, "Property");
@@ -42,7 +59,7 @@ public abstract class AbstractTO implements Serializable {
         this.stringProperties.compute(property, (k, v) -> value);
     }
 
-    private void validateProperties(final Iterator<PropertyAttribute> attributes, final String propertyName, final Object currentValue, final Object newValue) {
+    private <T> void validateProperties(final Iterator<PropertyAttribute> attributes, final String propertyName, final T currentValue, final T newValue) {
         while (attributes.hasNext()) {
             final PropertyAttribute attribute = attributes.next();
             switch (attribute) {

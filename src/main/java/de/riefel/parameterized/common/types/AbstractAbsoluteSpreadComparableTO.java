@@ -1,5 +1,8 @@
 package de.riefel.parameterized.common.types;
 
+import de.riefel.parameterized.common.property.IntegerProperty;
+import de.riefel.parameterized.common.property.PropertyAttribute;
+
 import java.io.Serializable;
 
 /**
@@ -14,8 +17,8 @@ public abstract class AbstractAbsoluteSpreadComparableTO extends AbstractTO impl
      */
     private static final long serialVersionUID = 7234615714945883566L;
 
-    private final int min;
-    private final int max;
+    private static final IntegerProperty MIN_PROPERTY = new IntegerProperty(AbstractAbsoluteSpreadComparableTO.class, "Min", PropertyAttribute.NOT_NULLABLE, PropertyAttribute.IMMUTABLE);
+    private static final IntegerProperty MAX_PROPERTY = new IntegerProperty(AbstractAbsoluteSpreadComparableTO.class, "Max", PropertyAttribute.NOT_NULLABLE, PropertyAttribute.IMMUTABLE);
 
     /**
      * Constructor to initialize min and max for spread comparison.
@@ -24,12 +27,12 @@ public abstract class AbstractAbsoluteSpreadComparableTO extends AbstractTO impl
      * @param max the max value.
      */
     protected AbstractAbsoluteSpreadComparableTO(final int min, final int max) {
-        this.min = min;
-        this.max = max;
+        setValue(MIN_PROPERTY, min);
+        setValue(MAX_PROPERTY, max);
     }
 
     private int getAbsoluteSpread() {
-        return Math.abs(this.max - this.min);
+        return Math.abs(getValue(MAX_PROPERTY) - getValue(MIN_PROPERTY));
     }
 
     @Override

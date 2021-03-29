@@ -1,5 +1,6 @@
 package de.riefel.parameterized.football;
 
+import de.riefel.parameterized.common.property.IntegerProperty;
 import de.riefel.parameterized.common.property.PropertyAttribute;
 import de.riefel.parameterized.common.property.StringProperty;
 import de.riefel.parameterized.common.types.AbstractAbsoluteSpreadComparableTO;
@@ -17,27 +18,26 @@ public class FootballTO extends AbstractAbsoluteSpreadComparableTO{
      */
     private static final long serialVersionUID = 875069962018384368L;
 
-    private static final StringProperty TEAM = new StringProperty(FootballTO.class, "Team", null, 1, Integer.MAX_VALUE, PropertyAttribute.NOT_NULLABLE, PropertyAttribute.IMMUTABLE);
-
-    private final int games;
-    private final int wins;
-    private final int losses;
-    private final int draws;
-    private final int goals;
-    private final int goalsAllowed;
-    private final int points;
+    private static final StringProperty TEAM_PROPERTY = new StringProperty(FootballTO.class, "Team", null, 1, Integer.MAX_VALUE, PropertyAttribute.NOT_NULLABLE, PropertyAttribute.IMMUTABLE);
+    private static final IntegerProperty GAMES_PROPERTY = new IntegerProperty(FootballTO.class, "Games", 0, Integer.MAX_VALUE, PropertyAttribute.NOT_NULLABLE, PropertyAttribute.IMMUTABLE);
+    private static final IntegerProperty WINS_PROPERTY = new IntegerProperty(FootballTO.class, "Wins", 0, Integer.MAX_VALUE, PropertyAttribute.NOT_NULLABLE, PropertyAttribute.IMMUTABLE);
+    private static final IntegerProperty LOSSES_PROPERTY = new IntegerProperty(FootballTO.class, "Losses", 0, Integer.MAX_VALUE, PropertyAttribute.NOT_NULLABLE, PropertyAttribute.IMMUTABLE);
+    private static final IntegerProperty DRAWS_PROPERTY = new IntegerProperty(FootballTO.class, "Draws", 0, Integer.MAX_VALUE, PropertyAttribute.NOT_NULLABLE, PropertyAttribute.IMMUTABLE);
+    private static final IntegerProperty GOALS_PROPERTY = new IntegerProperty(FootballTO.class, "Goals", 0, Integer.MAX_VALUE, PropertyAttribute.NOT_NULLABLE, PropertyAttribute.IMMUTABLE);
+    private static final IntegerProperty GOALS_ALLOWED_PROPERTY = new IntegerProperty(FootballTO.class, "Goals allowed", 0, Integer.MAX_VALUE, PropertyAttribute.NOT_NULLABLE, PropertyAttribute.IMMUTABLE);
+    private static final IntegerProperty POINTS_PROPERTY = new IntegerProperty(FootballTO.class, "Points", 0, Integer.MAX_VALUE, PropertyAttribute.NOT_NULLABLE, PropertyAttribute.IMMUTABLE);
 
     public FootballTO(final String team, final int games, final int wins, final int losses, final int draws,
                       final int goals, final int goalsAllowed, final int points) {
         super(goals, goalsAllowed);
-        setValue(TEAM, team);
-        this.games = games;
-        this.wins = wins;
-        this.losses = losses;
-        this.draws = draws;
-        this.goals = goals;
-        this.goalsAllowed = goalsAllowed;
-        this.points = points;
+        setValue(TEAM_PROPERTY, team);
+        setValue(GAMES_PROPERTY, games);
+        setValue(WINS_PROPERTY, wins);
+        setValue(LOSSES_PROPERTY, losses);
+        setValue(DRAWS_PROPERTY, draws);
+        setValue(GOALS_PROPERTY, goals);
+        setValue(GOALS_ALLOWED_PROPERTY, goalsAllowed);
+        setValue(POINTS_PROPERTY, points);
     }
 
     /**
@@ -46,7 +46,7 @@ public class FootballTO extends AbstractAbsoluteSpreadComparableTO{
      * @return value of team
      */
     public String getTeam() {
-        return getValue(TEAM);
+        return getValue(TEAM_PROPERTY);
     }
 
     /**
@@ -55,7 +55,7 @@ public class FootballTO extends AbstractAbsoluteSpreadComparableTO{
      * @return value of games
      */
     public int getGames() {
-        return this.games;
+        return getValue(GAMES_PROPERTY);
     }
 
     /**
@@ -64,7 +64,7 @@ public class FootballTO extends AbstractAbsoluteSpreadComparableTO{
      * @return value of wins
      */
     public int getWins() {
-        return this.wins;
+        return getValue(WINS_PROPERTY);
     }
 
     /**
@@ -73,7 +73,7 @@ public class FootballTO extends AbstractAbsoluteSpreadComparableTO{
      * @return value of losses
      */
     public int getLosses() {
-        return this.losses;
+        return getValue(LOSSES_PROPERTY);
     }
 
     /**
@@ -82,7 +82,7 @@ public class FootballTO extends AbstractAbsoluteSpreadComparableTO{
      * @return value of draws
      */
     public int getDraws() {
-        return this.draws;
+        return getValue(DRAWS_PROPERTY);
     }
 
     /**
@@ -91,7 +91,7 @@ public class FootballTO extends AbstractAbsoluteSpreadComparableTO{
      * @return value of goals
      */
     public int getGoals() {
-        return this.goals;
+        return getValue(GOALS_PROPERTY);
     }
 
     /**
@@ -100,7 +100,7 @@ public class FootballTO extends AbstractAbsoluteSpreadComparableTO{
      * @return value of goalsAllowed
      */
     public int getGoalsAllowed() {
-        return this.goalsAllowed;
+        return getValue(GOALS_ALLOWED_PROPERTY);
     }
 
     /**
@@ -109,7 +109,7 @@ public class FootballTO extends AbstractAbsoluteSpreadComparableTO{
      * @return value of points
      */
     public int getPoints() {
-        return this.points;
+        return getValue(POINTS_PROPERTY);
     }
 
     @Override
@@ -121,25 +121,25 @@ public class FootballTO extends AbstractAbsoluteSpreadComparableTO{
             return false;
         }
         FootballTO that = (FootballTO) o;
-        if (this.games != that.games) {
+        if (this.getGames() != that.getGames()) {
             return false;
         }
-        if (this.wins != that.wins) {
+        if (this.getWins() != that.getWins()) {
             return false;
         }
-        if (this.losses != that.losses) {
+        if (this.getLosses() != that.getLosses()) {
             return false;
         }
-        if (this.draws != that.draws) {
+        if (this.getDraws() != that.getDraws()) {
             return false;
         }
-        if (this.goals != that.goals) {
+        if (this.getGoals() != that.getGoals()) {
             return false;
         }
-        if (this.goalsAllowed != that.goalsAllowed) {
+        if (this.getGoalsAllowed() != that.getGoalsAllowed()) {
             return false;
         }
-        if (this.points != that.points) {
+        if (this.getPoints() != that.getPoints()) {
             return false;
         }
         return this.getTeam() != null ? this.getTeam().equals(that.getTeam()) : that.getTeam() == null;
@@ -148,27 +148,27 @@ public class FootballTO extends AbstractAbsoluteSpreadComparableTO{
     @Override
     public int hashCode() {
         int result = this.getTeam() != null ? this.getTeam().hashCode() : 0;
-        result = 31 * result + this.games;
-        result = 31 * result + this.wins;
-        result = 31 * result + this.losses;
-        result = 31 * result + this.draws;
-        result = 31 * result + this.goals;
-        result = 31 * result + this.goalsAllowed;
-        result = 31 * result + this.points;
+        result = 31 * result + this.getGames();
+        result = 31 * result + this.getWins();
+        result = 31 * result + this.getLosses();
+        result = 31 * result + this.getDraws();
+        result = 31 * result + this.getGoals();
+        result = 31 * result + this.getGoalsAllowed();
+        result = 31 * result + this.getPoints();
         return result;
     }
 
     @Override
     public String toString() {
         return "FootballTO{" +
-                "team='" + getTeam() + '\'' +
-                ", games=" + this.games +
-                ", wins=" + this.wins +
-                ", losses=" + this.losses +
-                ", draws=" + this.draws +
-                ", goals=" + this.goals +
-                ", goalsAllowed=" + this.goalsAllowed +
-                ", points=" + this.points +
+                "team='" + this.getTeam() + '\'' +
+                ", games=" + this.getGames() +
+                ", wins=" + this.getWins() +
+                ", losses=" + this.getLosses() +
+                ", draws=" + this.getDraws() +
+                ", goals=" + this.getGoals() +
+                ", goalsAllowed=" + this.getGoalsAllowed() +
+                ", points=" + this.getPoints() +
                 '}';
     }
 }

@@ -39,7 +39,7 @@ abstract class BaseException extends RuntimeException {
         super(getFormattedErrorCode(errorCode) + ": " + message);
         this.errorCode = errorCode;
         this.referenceCode = ReferenceCodeGenerator.generateReferenceCode();
-        LOG.error("{}: {}", getFormattedErrorCode(errorCode), message);
+        LOG.debug("{}: {}", getFormattedErrorCode(errorCode), message);
         LOG.info("Generated reference code for exception with error code '{}' is: '{}'", getFormattedErrorCode(errorCode), this.referenceCode);
     }
 
