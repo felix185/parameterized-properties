@@ -1,5 +1,6 @@
 package de.riefel.parameterized.common.types;
 
+import de.riefel.parameterized.common.property.DoubleProperty;
 import de.riefel.parameterized.common.property.IntegerProperty;
 import de.riefel.parameterized.common.property.PropertyAttribute;
 import de.riefel.parameterized.common.property.StringProperty;
@@ -24,6 +25,22 @@ public abstract class AbstractTO implements Serializable {
 
     private final Map<StringProperty, String> stringProperties = new HashMap<>();
     private final Map<IntegerProperty, Integer> integerProperties = new HashMap<>();
+    private final Map<DoubleProperty, Double> doubleProperties = new HashMap<>();
+
+    protected Double getValue(final DoubleProperty property) {
+        ArgumentChecker.checkNotNull(property, "Property");
+        return this.doubleProperties.get(property);
+    }
+
+    protected void setValue(final DoubleProperty property, final Double value) {
+        ArgumentChecker.checkNotNull(property, "Property");
+        final Double currentValue = this.doubleProperties.get(property);
+        validateProperties(property.getAttributes(), property.getName(), currentValue, value);
+        if (value != null) {
+            ArgumentChecker.checkIntervalUpperBoundIncluded(property.getMinValue(), value, property.getMaxValue(), property.getName());
+        }
+        this.doubleProperties.compute(property, (k, v) -> value);
+    }
 
     protected Integer getValue(final IntegerProperty property) {
         ArgumentChecker.checkNotNull(property, "Property");
@@ -82,6 +99,7 @@ public abstract class AbstractTO implements Serializable {
         for (final Integer integerProperty : this.integerProperties.values()) {
             result = 31 * result + (integerProperty != null ? integerProperty : 0);
         }
+        // TODO [FR] (01.04.2021): hashcode for doubles
         return result;
     }
 
@@ -100,6 +118,9 @@ public abstract class AbstractTO implements Serializable {
         if (this.integerProperties.size() != that.integerProperties.size()) {
             return false;
         }
+        if (this.doubleProperties.size() != that.doubleProperties.size()) {
+            return false;
+        }
         for (Map.Entry<StringProperty, String> stringPropertyEntry : this.stringProperties.entrySet()) {
             final String thatString = that.stringProperties.get(stringPropertyEntry.getKey());
             final String thisString = stringPropertyEntry.getValue();
@@ -109,15 +130,39 @@ public abstract class AbstractTO implements Serializable {
                 } else if (!thisString.equals(thatString)) {
                     return false;
                 }
+            } else {
+                if (thatString != null) {
+                    return false;
+                }
             }
         }
-        for(Map.Entry<IntegerProperty, Integer> integerPropertyEntry : this.integerProperties.entrySet()) {
+        for (Map.Entry<IntegerProperty, Integer> integerPropertyEntry : this.integerProperties.entrySet()) {
             final Integer thatInt = that.integerProperties.get(integerPropertyEntry.getKey());
             final Integer thisInt = integerPropertyEntry.getValue();
-            if(thisInt != null) {
-                if(thatInt == null) {
+            if (thisInt != null) {
+                if (thatInt == null) {
                     return false;
-                } else if(!thisInt.equals(thatInt)) {
+                } else if (!thisInt.equals(thatInt)) {
+                    return false;
+                }
+            } else {
+                if (thatInt != null) {
+                    return false;
+                }
+            }
+        }
+
+        for (Map.Entry<DoubleProperty, Double> doublePropertyEntry : this.doubleProperties.entrySet()) {
+            final Double thatDouble = that.doubleProperties.get(doublePropertyEntry.getKey());
+            final Double thisDouble = doublePropertyEntry.getValue();
+            if (thisDouble != null) {
+                if (thatDouble == null) {
+                    return false;
+                } else if (!thisDouble.equals(thatDouble)) {
+                    return false;
+                }
+            } else {
+                if (thatDouble != null) {
                     return false;
                 }
             }
