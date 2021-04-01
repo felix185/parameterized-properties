@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 /**
  * @author Felix Riess <felix@felix-riess.de>
@@ -28,5 +29,19 @@ public class FootballTOTest {
         bayernSet.add(bayern1);
         bayernSet.add(bayern2);
         assertEquals(1, bayernSet.size());
+    }
+
+    @Test
+    void equals_twoEqualTeams_shouldReturnTrue() {
+        final FootballTO bayern1 = new FootballTO("Bayern München", 34, 34, 0, 0, 100, 2, 102);
+        final FootballTO bayern2 = new FootballTO("Bayern München", 34, 34, 0, 0, 100, 2, 102);
+        assertEquals(bayern1, bayern2);
+    }
+
+    @Test
+    void equals_twoNotEqualTeams_shouldReturnFalse() {
+        final FootballTO bayern = new FootballTO("Bayern München", 34, 34, 0, 0, 100, 2, 102);
+        final FootballTO dortmund = new FootballTO("Borussia Dortmund", 34, 32, 2, 0, 99, 3, 96);
+        assertNotEquals(bayern, dortmund);
     }
 }

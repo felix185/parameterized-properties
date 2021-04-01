@@ -113,39 +113,6 @@ public class FootballTO extends AbstractAbsoluteSpreadComparableTO{
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof FootballTO)) {
-            return false;
-        }
-        FootballTO that = (FootballTO) o;
-        if (this.getGames() != that.getGames()) {
-            return false;
-        }
-        if (this.getWins() != that.getWins()) {
-            return false;
-        }
-        if (this.getLosses() != that.getLosses()) {
-            return false;
-        }
-        if (this.getDraws() != that.getDraws()) {
-            return false;
-        }
-        if (this.getGoals() != that.getGoals()) {
-            return false;
-        }
-        if (this.getGoalsAllowed() != that.getGoalsAllowed()) {
-            return false;
-        }
-        if (this.getPoints() != that.getPoints()) {
-            return false;
-        }
-        return this.getTeam() != null ? this.getTeam().equals(that.getTeam()) : that.getTeam() == null;
-    }
-
-    @Override
     public String toString() {
         return "FootballTO{" +
                 "team='" + this.getTeam() + '\'' +

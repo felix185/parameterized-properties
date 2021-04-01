@@ -86,5 +86,45 @@ public abstract class AbstractTO implements Serializable {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof AbstractTO)) {
+            return false;
+        }
+        final AbstractTO that = (AbstractTO) o;
+        if (this.stringProperties.size() != that.stringProperties.size()) {
+            return false;
+        }
+        if (this.integerProperties.size() != that.integerProperties.size()) {
+            return false;
+        }
+        for (Map.Entry<StringProperty, String> stringPropertyEntry : this.stringProperties.entrySet()) {
+            final String thatString = that.stringProperties.get(stringPropertyEntry.getKey());
+            final String thisString = stringPropertyEntry.getValue();
+            if (thisString != null) {
+                if (thatString == null) {
+                    return false;
+                } else if (!thisString.equals(thatString)) {
+                    return false;
+                }
+            }
+        }
+        for(Map.Entry<IntegerProperty, Integer> integerPropertyEntry : this.integerProperties.entrySet()) {
+            final Integer thatInt = that.integerProperties.get(integerPropertyEntry.getKey());
+            final Integer thisInt = integerPropertyEntry.getValue();
+            if(thisInt != null) {
+                if(thatInt == null) {
+                    return false;
+                } else if(!thisInt.equals(thatInt)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
     public abstract String toString();
 }

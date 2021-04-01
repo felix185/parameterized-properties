@@ -39,7 +39,4 @@ public abstract class AbstractAbsoluteSpreadComparableTO extends AbstractTO impl
     public int compareTo(AbstractAbsoluteSpreadComparableTO other) {
         return Integer.compare(getAbsoluteSpread(), other.getAbsoluteSpread());
     }
-
-    @Override
-    public abstract boolean equals(Object o);
 }
