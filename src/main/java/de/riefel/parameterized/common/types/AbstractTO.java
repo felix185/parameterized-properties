@@ -99,7 +99,14 @@ public abstract class AbstractTO implements Serializable {
         for (final Integer integerProperty : this.integerProperties.values()) {
             result = 31 * result + (integerProperty != null ? integerProperty : 0);
         }
-        // TODO [FR] (01.04.2021): hashcode for doubles
+        for (final Double doubleProperty : this.doubleProperties.values()) {
+            if (doubleProperty == null) {
+                result = 31 * result;
+            } else {
+                long temp = Double.doubleToLongBits(doubleProperty);
+                result = 31 * result + (int) (temp ^ (temp >>> 32));
+            }
+        }
         return result;
     }
 
