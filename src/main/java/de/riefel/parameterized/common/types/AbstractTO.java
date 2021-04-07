@@ -17,7 +17,7 @@ import java.util.Map;
  * @author Felix Riess <felix@felix-riess.de>
  * @since 27.03.21
  */
-public abstract class AbstractTO implements Serializable {
+public abstract class AbstractTO implements Serializable, Comparable<AbstractTO> {
     /**
      * generated serialVersionUID.
      */
@@ -175,6 +175,68 @@ public abstract class AbstractTO implements Serializable {
             }
         }
         return true;
+    }
+
+    @Override
+    public int compareTo(final AbstractTO other) {
+        for (Map.Entry<StringProperty, String> stringPropertyEntry : this.stringProperties.entrySet()) {
+            if (stringPropertyEntry.getKey().isCompared()) {
+                final String thisString = stringPropertyEntry.getValue();
+                final String thatString = other.stringProperties.get(stringPropertyEntry.getKey());
+                if (thisString != null) {
+                    if (thatString == null) {
+                        return 1;
+                    }
+                    final int compared = thisString.compareTo(thatString);
+                    if (compared != 0) {
+                        return compared < 0 ? 1 : -1;
+                    }
+                } else {
+                    if (thatString != null) {
+                        return -1;
+                    }
+                }
+            }
+        }
+        for (Map.Entry<IntegerProperty, Integer> integerPropertyEntry : this.integerProperties.entrySet()) {
+            if (integerPropertyEntry.getKey().isCompared()) {
+                final Integer thisInt = integerPropertyEntry.getValue();
+                final Integer thatInt = other.integerProperties.get(integerPropertyEntry.getKey());
+                if (thisInt != null) {
+                    if (thatInt == null) {
+                        return 1;
+                    }
+                    final int compared = Integer.compare(thisInt, thatInt);
+                    if (compared != 0) {
+                        return compared;
+                    }
+                } else {
+                    if (thatInt != null) {
+                        return -1;
+                    }
+                }
+            }
+        }
+        for (Map.Entry<DoubleProperty, Double> doublePropertyEntry : this.doubleProperties.entrySet()) {
+            if (doublePropertyEntry.getKey().isCompared()) {
+                final Double thisDouble = doublePropertyEntry.getValue();
+                final Double thatDouble = other.doubleProperties.get(doublePropertyEntry.getKey());
+                if (thisDouble != null) {
+                    if (thatDouble == null) {
+                        return 1;
+                    }
+                    final int compared = Double.compare(thisDouble, thatDouble);
+                    if (compared != 0) {
+                        return compared;
+                    }
+                } else {
+                    if (thatDouble != null) {
+                        return -1;
+                    }
+                }
+            }
+        }
+        return 0;
     }
 
     @Override

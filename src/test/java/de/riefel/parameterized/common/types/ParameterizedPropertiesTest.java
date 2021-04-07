@@ -57,4 +57,11 @@ public class ParameterizedPropertiesTest {
         assertEquals(RIVAL, testTeam.getRival());
         assertEquals(GOOD_TEAM, testTeam.getTeam());
     }
+
+    @Test
+    void compareTo_bayernVsDortmund_shouldReturnBayern() {
+        final TestTO bayern = new TestTO(GOOD_TEAM);
+        final TestTO dortmund = new TestTO(RIVAL);
+        assertEquals(1, bayern.compareTo(dortmund));
+    }
 }

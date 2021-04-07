@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author Felix Riess <felix@felix-riess.de>
  * @since 26.03.21
  */
-public abstract class AbstractAbsoluteSpreadComparableTO extends AbstractTO implements Comparable<AbstractAbsoluteSpreadComparableTO>, Serializable {
+public abstract class AbstractAbsoluteSpreadComparableTO extends AbstractTO {
     /**
      * generated serialVersionUID.
      */
@@ -35,8 +35,5 @@ public abstract class AbstractAbsoluteSpreadComparableTO extends AbstractTO impl
         return Math.abs(getValue(MAX_PROPERTY) - getValue(MIN_PROPERTY));
     }
 
-    @Override
-    public int compareTo(AbstractAbsoluteSpreadComparableTO other) {
-        return Integer.compare(getAbsoluteSpread(), other.getAbsoluteSpread());
-    }
+
 }
