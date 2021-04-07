@@ -20,6 +20,27 @@ public class StringProperty extends AbstractProperty {
      *
      * @param clazz the associated class of this property (not {@code null}).
      * @param name the name of the property (not {@code null} or empty).
+     * @param isCompared {@code true} if property should be used for {@link Comparable#compareTo(Object)}, {@code false} otherwise.
+     * @param pattern a specific RegEx pattern (may be {@code null}).
+     * @param minLength the min length of the attribute ({@code minLength <= maxLength}).
+     * @param maxLength the max length of the attribute ({@code minLength <= maxLength}).
+     * @param attributes additional {@link PropertyAttribute}s.
+     */
+    public StringProperty(final Class<?> clazz, final String name, final boolean isCompared, final Pattern pattern, final int minLength,
+                          final int maxLength, PropertyAttribute...attributes) {
+        super(clazz, name, isCompared, attributes);
+        ArgumentChecker.checkIsTrue(minLength <= maxLength, "MinLength {} is greater than MaxLength {}", minLength, maxLength);
+        this.pattern = pattern;
+        this.minLength = minLength;
+        this.maxLength = maxLength;
+    }
+
+    /**
+     * Constructor.
+     * Property will not be used for {@link Comparable#compareTo(Object)}.
+     *
+     * @param clazz the associated class of this property (not {@code null}).
+     * @param name the name of the property (not {@code null} or empty).
      * @param pattern a specific RegEx pattern (may be {@code null}).
      * @param minLength the min length of the attribute ({@code minLength <= maxLength}).
      * @param maxLength the max length of the attribute ({@code minLength <= maxLength}).
@@ -27,11 +48,7 @@ public class StringProperty extends AbstractProperty {
      */
     public StringProperty(final Class<?> clazz, final String name, final Pattern pattern, final int minLength,
                           final int maxLength, PropertyAttribute...attributes) {
-        super(clazz, name, attributes);
-        ArgumentChecker.checkIsTrue(minLength <= maxLength, "MinLength {} is greater than MaxLength {}", minLength, maxLength);
-        this.pattern = pattern;
-        this.minLength = minLength;
-        this.maxLength = maxLength;
+        this(clazz, name, false, pattern, minLength, maxLength, attributes);
     }
 
     /**
