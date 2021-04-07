@@ -4,6 +4,7 @@ import de.riefel.parameterized.common.errorhandling.exception.BusinessException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -63,5 +64,12 @@ public class ParameterizedPropertiesTest {
         final TestTO bayern = new TestTO(GOOD_TEAM);
         final TestTO dortmund = new TestTO(RIVAL);
         assertEquals(1, bayern.compareTo(dortmund));
+    }
+
+    @Test
+    void equals_twoClasses_shouldReturnFalse() {
+        final TestTO test = new TestTO();
+        final AnotherTestTO anotherTest = new AnotherTestTO();
+        assertNotEquals(test, anotherTest);
     }
 }

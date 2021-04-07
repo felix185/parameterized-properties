@@ -115,7 +115,7 @@ public abstract class AbstractTO implements Serializable, Comparable<AbstractTO>
         if (this == o) {
             return true;
         }
-        if (!(o instanceof AbstractTO)) {
+        if (getClass() != o.getClass()) {
             return false;
         }
         final AbstractTO that = (AbstractTO) o;
