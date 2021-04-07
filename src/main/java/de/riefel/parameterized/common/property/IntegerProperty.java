@@ -59,6 +59,19 @@ public class IntegerProperty extends AbstractProperty {
     }
 
     /**
+     * Constructor.
+     * Sets minValue to {@link Integer#MIN_VALUE} and maxValue to {@link Integer#MAX_VALUE}.
+     *
+     * @param clazz the associated class of this property (not {@code null}).
+     * @param name the name of the property (not {@code null} or empty).
+     * @param isCompared {@code true} if property should be used for {@link Comparable#compareTo(Object)}, {@code false} otherwise.
+     * @param attributes additional {@link PropertyAttribute}s.
+     */
+    public IntegerProperty(final Class<?> clazz, final String name, final boolean isCompared, final PropertyAttribute...attributes) {
+        this(clazz, name, isCompared, Integer.MIN_VALUE, Integer.MAX_VALUE, attributes);
+    }
+
+    /**
      * Get minValue
      *
      * @return value of minValue
