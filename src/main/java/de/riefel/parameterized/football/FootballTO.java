@@ -7,12 +7,11 @@ import de.riefel.parameterized.common.types.AbstractAbsoluteSpreadComparableTO;
 
 /**
  * Transport object representing the football data.
- * Extends {@link AbstractAbsoluteSpreadComparableTO} for {@link AbstractAbsoluteSpreadComparableTO#compareTo(AbstractAbsoluteSpreadComparableTO)}.
  *
  * @author Felix Riess <felix@felix-riess.de>
  * @since 26.03.21
  */
-public class FootballTO extends AbstractAbsoluteSpreadComparableTO{
+public class FootballTO extends AbstractAbsoluteSpreadComparableTO {
     /**
      * generated serialVersionUID.
      */

@@ -6,6 +6,8 @@ import de.riefel.parameterized.football.FootballTO;
 import de.riefel.parameterized.reader.IDataReader;
 import de.riefel.parameterized.reader.factory.DataReaderFactory;
 import de.riefel.parameterized.reader.factory.DataReaderType;
+import de.riefel.parameterized.weather.WeatherLineMapper;
+import de.riefel.parameterized.weather.WeatherTO;
 
 import java.util.Collections;
 import java.util.List;
@@ -22,18 +24,28 @@ public class App {
 
     /**
      * The main entry method of the app.
+     *
      * @param args optional command line arguments
      */
-    public static void main(String...args) {
+    public static void main(String... args) {
         final IDataReader csvDataReader = DataReaderFactory.getDataReader(DataReaderType.CSV_COMMA_SEPARATED);
         final String pathToFootballData = "src/main/resources/de/riefel/parameterized/football.csv";
         final List<FootballTO> footballData = csvDataReader.readData(pathToFootballData, new FootballLineMapper());
-        if(footballData.isEmpty()) {
+        if (footballData.isEmpty()) {
             LOG.warn("No football data could be read");
         } else {
             Collections.sort(footballData);
             final FootballTO smallestGoalSpread = footballData.get(0);
             LOG.info("Team with smallest goal spread is: {}", smallestGoalSpread.getTeam());
+        }
+        final String pathToWeatherData = "src/main/resources/de/riefel/parameterized/weather.csv";
+        final List<WeatherTO> weatherData = csvDataReader.readData(pathToWeatherData, new WeatherLineMapper());
+        if (weatherData.isEmpty()) {
+            LOG.warn("No weather data could be read");
+        } else {
+            Collections.sort(weatherData);
+            final WeatherTO smallestTempSpread = weatherData.get(0);
+            LOG.info("Day with smallest temp spread is: {}", smallestTempSpread.getDay());
         }
     }
 }
