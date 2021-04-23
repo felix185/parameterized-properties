@@ -1,5 +1,7 @@
 package de.riefel.parameterized.common.types;
 
+import de.riefel.parameterized.common.errorhandling.ErrorCode;
+import de.riefel.parameterized.common.errorhandling.exception.TechnicalException;
 import de.riefel.parameterized.common.property.DoubleProperty;
 import de.riefel.parameterized.common.property.IntegerProperty;
 import de.riefel.parameterized.common.property.PropertyAttribute;
@@ -179,6 +181,9 @@ public abstract class AbstractTO implements Serializable, Comparable<AbstractTO>
 
     @Override
     public int compareTo(final AbstractTO other) {
+        if (getClass() != other.getClass()) {
+            throw new TechnicalException(ErrorCode.ILLEGAL_ACCESS, "Different classes cannot be compared to each other");
+        }
         for (Map.Entry<StringProperty, String> stringPropertyEntry : this.stringProperties.entrySet()) {
             if (stringPropertyEntry.getKey().isCompared()) {
                 final String thisString = stringPropertyEntry.getValue();

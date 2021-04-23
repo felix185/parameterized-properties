@@ -1,6 +1,7 @@
 package de.riefel.parameterized.common.types;
 
 import de.riefel.parameterized.common.errorhandling.exception.BusinessException;
+import de.riefel.parameterized.common.errorhandling.exception.TechnicalException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -71,5 +72,12 @@ public class ParameterizedPropertiesTest {
         final TestTO test = new TestTO();
         final AnotherTestTO anotherTest = new AnotherTestTO();
         assertNotEquals(test, anotherTest);
+    }
+
+    @Test
+    void compareTo_twoClasses_shouldNotBeCompared() {
+        final TestTO test = new TestTO();
+        final AnotherTestTO anotherTest = new AnotherTestTO();
+        assertThrows(TechnicalException.class, () -> test.compareTo(anotherTest));
     }
 }

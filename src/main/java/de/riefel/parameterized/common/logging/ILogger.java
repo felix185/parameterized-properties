@@ -1,5 +1,7 @@
 package de.riefel.parameterized.common.logging;
 
+import de.riefel.parameterized.common.errorhandling.ExceptionUtils;
+
 /**
  * A log4j-like interface for logging.
  *
@@ -32,9 +34,9 @@ public interface ILogger {
      * Logs an event of the specified type and associated arguments.
      *
      * @param event the event type as {@link ILogEvent}.
-     * @param args additional arguments for the log message.
+     * @param args  additional arguments for the log message.
      */
-    default void log(final ILogEvent event, final Object...args) {
+    default void log(final ILogEvent event, final Object... args) {
         final String format = event.getId() + ": " + event.getFormat();
         switch (event.getLevel()) {
             case TRACE:
@@ -62,54 +64,54 @@ public interface ILogger {
      * Logs a message with the provided format and arguments on {@link LogLevel#TRACE}.
      *
      * @param format the format of the message as {@link String}.
-     * @param args optional additional arguments for the message.
+     * @param args   optional additional arguments for the message.
      */
-    void trace(final String format, final Object...args);
+    void trace(final String format, final Object... args);
 
     /**
      * Logs a message with the provided format and arguments on {@link LogLevel#DEBUG}.
      *
      * @param format the format of the message as {@link String}.
-     * @param args optional additional arguments for the message.
+     * @param args   optional additional arguments for the message.
      */
-    void debug(final String format, final Object...args);
+    void debug(final String format, final Object... args);
 
     /**
      * Logs a message with the provided format and arguments on {@link LogLevel#INFO}.
      *
      * @param format the format of the message as {@link String}.
-     * @param args optional additional arguments for the message.
+     * @param args   optional additional arguments for the message.
      */
-    void info(final String format, final Object...args);
+    void info(final String format, final Object... args);
 
     /**
      * Logs a message with the provided format and arguments on {@link LogLevel#WARN}.
      *
      * @param format the format of the message as {@link String}.
-     * @param args optional additional arguments for the message.
+     * @param args   optional additional arguments for the message.
      */
-    void warn(final String format, final Object...args);
+    void warn(final String format, final Object... args);
 
     /**
      * Logs a message with the provided format and arguments on {@link LogLevel#ERROR}.
      *
      * @param format the format of the message as {@link String}.
-     * @param args optional additional arguments for the message.
+     * @param args   optional additional arguments for the message.
      */
-    void error(final String format, final Object...args);
+    void error(final String format, final Object... args);
 
     /**
      * Logs a message with the provided format and arguments on {@link LogLevel#FATAL}.
      *
      * @param format the format of the message as {@link String}.
-     * @param args optional additional arguments for the message.
+     * @param args   optional additional arguments for the message.
      */
-    void fatal(final String format, final Object...args);
+    void fatal(final String format, final Object... args);
 
     /**
      * Logs the execution time of an operation in milliseconds on {@link LogLevel#INFO}.
      *
-     * @param operationName the name of the operation which was executed.
+     * @param operationName         the name of the operation which was executed.
      * @param executionTimeInMillis the execution time in milliseconds.
      */
     default void logExecutionTime(final String operationName, final long executionTimeInMillis) {
@@ -120,25 +122,26 @@ public interface ILogger {
      * Formats the provided {@link String} (with '{}' as placeholders) with its arguments to a {@link String}.
      *
      * @param format the format of the message with placeholders.
-     * @param args optional arguments with which the placeholders should be filled.
+     * @param args   optional arguments with which the placeholders should be filled.
      * @return a formatted {@link String} with placeholders replaced by actual arguments.
      */
-    default String format(final String format, final Object...args) {
-        if(args.length == 0) {
+    default String format(final String format, final Object... args) {
+        if (args.length == 0) {
             return format;
         }
         final StringBuilder logBuilder = new StringBuilder();
         int position = 0;
-        for(int i = 0; i < args.length; i++) {
+        for (Object arg : args) {
             int index = format.indexOf("{}", position);
-            if(index < 0) {
+            if (index < 0) {
                 break;
             }
-            logBuilder.append(format.substring(position, index));
-            logBuilder.append(args[i] == null ? "null" : args[i].toString());
+            logBuilder.append(format, position, index);
+            logBuilder.append(arg == null ? "null" :
+                    arg instanceof Throwable ? ExceptionUtils.convertStacktraceToString((Throwable) arg) : arg.toString());
             position = index + 2;
         }
-        if(format.length() > position) {
+        if (format.length() > position) {
             logBuilder.append(format.substring(position));
         }
         return logBuilder.toString();
@@ -148,10 +151,10 @@ public interface ILogger {
      * Formats the provided {@link ILogEvent} with its arguments to a {@link String}.
      *
      * @param event the {@link ILogEvent} for the message.
-     * @param args the arguments with which placeholders should be filled.
+     * @param args  the arguments with which placeholders should be filled.
      * @return the formatted {@link String} with the placeholders replaced by actual arguments.
      */
-    default String format(final ILogEvent event, final Object...args) {
+    default String format(final ILogEvent event, final Object... args) {
         return format(event.getFormat(), args);
     }
 }

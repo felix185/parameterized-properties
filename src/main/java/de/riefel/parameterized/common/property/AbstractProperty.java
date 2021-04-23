@@ -21,8 +21,8 @@ public abstract class AbstractProperty {
     /**
      * Constructor.
      *
-     * @param clazz the associated class with this property (not {@code null}).
-     * @param name the name of the property (not {@code null} or empty).
+     * @param clazz      the associated class with this property (not {@code null}).
+     * @param name       the name of the property (not {@code null} or empty).
      * @param isCompared {@code true} if property should be used for {@link Comparable#compareTo(Object)}, {@code false} otherwise.
      * @param attributes additional {@link PropertyAttribute}s.
      */
@@ -46,6 +46,7 @@ public abstract class AbstractProperty {
 
     /**
      * Get an iterator over an unmodifiable list of the {@link PropertyAttribute}s
+     *
      * @return an {@link Iterator} over an unmodifiable list of the {@link PropertyAttribute}s.
      */
     public Iterator<PropertyAttribute> getAttributes() {
@@ -66,7 +67,7 @@ public abstract class AbstractProperty {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof AbstractProperty)) {
+        if (getClass() != o.getClass()) {
             return false;
         }
         AbstractProperty that = (AbstractProperty) o;
