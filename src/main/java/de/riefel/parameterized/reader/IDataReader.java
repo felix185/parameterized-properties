@@ -1,6 +1,7 @@
 package de.riefel.parameterized.reader;
 
 import de.riefel.parameterized.common.types.AbstractAbsoluteSpreadComparableTO;
+import de.riefel.parameterized.common.types.ArraySet;
 
 import java.util.List;
 
@@ -20,5 +21,5 @@ public interface IDataReader {
      * @param <T> the type to be returned (must extend {@link AbstractAbsoluteSpreadComparableTO}.
      * @return a {@link List} of the valid data.
      */
-    <T extends AbstractAbsoluteSpreadComparableTO> List<T> readData(final String pathToFile, final ILineMapper<T> lineMapper);
+    <T extends AbstractAbsoluteSpreadComparableTO> ArraySet<T> readData(final String pathToFile, final ILineMapper<T> lineMapper);
 }
