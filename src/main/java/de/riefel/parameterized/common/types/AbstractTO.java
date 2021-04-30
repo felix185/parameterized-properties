@@ -194,7 +194,7 @@ public abstract class AbstractTO implements Serializable, Comparable<AbstractTO>
                     }
                     final int compared = thisString.compareTo(thatString);
                     if (compared != 0) {
-                        return compared < 0 ? 1 : -1;
+                        return compared < 0 ? -1 : 1;
                     }
                 } else {
                     if (thatString != null) {
