@@ -1,7 +1,6 @@
 package de.riefel.parameterized.common.types;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestTemplate;
 
 import java.util.Arrays;
 import java.util.List;
