@@ -13,11 +13,6 @@ import de.riefel.parameterized.common.types.AbstractAbsoluteSpreadComparableTO;
  */
 public class WeatherTO extends AbstractAbsoluteSpreadComparableTO {
 
-    /**
-     * generated serialVersionUID.
-     */
-    private static final long serialVersionUID = -1118438316184438290L;
-
     private static final IntegerProperty DAY_PROPERTY = new IntegerProperty(WeatherTO.class, "Day", 1, 31, PropertyAttribute.IMMUTABLE, PropertyAttribute.NOT_NULLABLE);
     private static final IntegerProperty MXT_PROPERTY = new IntegerProperty(WeatherTO.class, "MxT", PropertyAttribute.IMMUTABLE, PropertyAttribute.NOT_NULLABLE);
     private static final IntegerProperty MNT_PROPERTY = new IntegerProperty(WeatherTO.class, "MnT", PropertyAttribute.IMMUTABLE, PropertyAttribute.NOT_NULLABLE);

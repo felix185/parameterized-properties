@@ -10,10 +10,6 @@ import de.riefel.parameterized.common.property.PropertyAttribute;
  * @since 26.03.21
  */
 public abstract class AbstractAbsoluteSpreadComparableTO extends AbstractTO {
-    /**
-     * generated serialVersionUID.
-     */
-    private static final long serialVersionUID = 7234615714945883566L;
 
     private static final IntegerProperty ABSOLUTE_SPREAD_PROPERTY = new IntegerProperty(AbstractAbsoluteSpreadComparableTO.class, "Absolute spread", true, PropertyAttribute.NOT_NULLABLE, PropertyAttribute.IMMUTABLE);
 

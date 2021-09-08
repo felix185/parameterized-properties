@@ -12,10 +12,6 @@ import de.riefel.parameterized.common.types.AbstractAbsoluteSpreadComparableTO;
  * @since 26.03.21
  */
 public class FootballTO extends AbstractAbsoluteSpreadComparableTO {
-    /**
-     * generated serialVersionUID.
-     */
-    private static final long serialVersionUID = 875069962018384368L;
 
     private static final StringProperty TEAM_PROPERTY = new StringProperty(FootballTO.class, "Team", null, 1, Integer.MAX_VALUE, PropertyAttribute.NOT_NULLABLE, PropertyAttribute.IMMUTABLE);
     private static final IntegerProperty GAMES_PROPERTY = new IntegerProperty(FootballTO.class, "Games", 0, Integer.MAX_VALUE, PropertyAttribute.NOT_NULLABLE, PropertyAttribute.IMMUTABLE);

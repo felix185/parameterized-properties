@@ -8,7 +8,6 @@ import de.riefel.parameterized.common.property.PropertyAttribute;
 import de.riefel.parameterized.common.property.StringProperty;
 import de.riefel.parameterized.common.validation.ArgumentChecker;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -19,11 +18,7 @@ import java.util.Map;
  * @author Felix Riess <felix@felix-riess.de>
  * @since 27.03.21
  */
-public abstract class AbstractTO implements Serializable, Comparable<AbstractTO> {
-    /**
-     * generated serialVersionUID.
-     */
-    private static final long serialVersionUID = 6957221635679729861L;
+public abstract class AbstractTO implements Comparable<AbstractTO> {
 
     private final Map<StringProperty, String> stringProperties = new HashMap<>();
     private final Map<IntegerProperty, Integer> integerProperties = new HashMap<>();

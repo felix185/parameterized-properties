@@ -7,10 +7,6 @@ package de.riefel.parameterized.common.types;
  * @since 07.04.21
  */
 public class AnotherTestTO extends AbstractTO {
-    /**
-     * generated serialVersionUID.
-     */
-    private static final long serialVersionUID = -1921799361413661564L;
 
     @Override
     public String toString() {

@@ -11,10 +11,6 @@ import org.junit.jupiter.api.Test;
  * @since 27.03.21
  */
 public class TestTO extends AbstractTO {
-    /**
-     * generated serialVersionUID.
-     */
-    private static final long serialVersionUID = 1670728636069734461L;
 
     private static final StringProperty TEAM = new StringProperty(TestTO.class, "Team", true,null, 1, Integer.MAX_VALUE, PropertyAttribute.IMMUTABLE, PropertyAttribute.NOT_NULLABLE);
     private static final StringProperty RIVAL = new StringProperty(TestTO.class, "Rival", null, 1, Integer.MAX_VALUE);
